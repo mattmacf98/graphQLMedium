@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "Calculus",
+    "studentIds": [7, 15, 16, 18, 19, 4, 10, 6, 2, 8]
+  },
+  {
+    "id": 2,
+    "name": "US History",
+    "studentIds": [19, 5, 12, 1, 14, 17, 9, 11, 20, 18]
+  },
+  {
+    "id": 3,
+    "name": "Biology",
+    "studentIds": [15, 3, 10, 6, 5, 8, 19, 16, 1, 7]
+  },
+  {
+    "id": 4,
+    "name": "English Literature",
+    "studentIds": [17, 9, 5, 11, 20, 18, 4, 8, 3, 7]
+  },
+  {
+    "id": 5,
+    "name": "Physics",
+    "studentIds": [1, 16, 19, 18, 10, 5, 8, 3, 7, 6]
+  },
+  {
+    "id": 6,
+    "name": "Chemistry",
+    "studentIds": [19, 4, 17, 7, 14, 6, 10, 1, 8, 3]
+  },
+  {
+    "id": 7,
+    "name": "Spanish",
+    "studentIds": [16, 5, 11, 9, 18, 3, 2, 4, 6, 1]
+  },
+  {
+    "id": 8,
+    "name": "French",
+    "studentIds": [15, 2, 8, 17, 5, 9, 3, 20, 11, 14]
+  },
+  {
+    "id": 9,
+    "name": "Music Theory",
+    "studentIds": [20, 6, 2, 5, 11, 8, 18, 1, 16, 4]
+  },
+  {
+    "id": 10,
+    "name": "Art History",
+    "studentIds": [19, 14, 6, 12, 5, 11, 16, 2, 4, 9]
+  }
+]

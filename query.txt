@@ -1,0 +1,6 @@
+query {
+    students {
+        firstName
+        grade
+    }
+}
