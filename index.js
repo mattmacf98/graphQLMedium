@@ -6,6 +6,7 @@ const typeDefs = gql`
     type Query {
         students(id: ID, firstName: String, lastName: String, grade: Int): [Student]
         studentById(id: ID): Student
+        studentsInClass(id: ID): [Student]
         classes(id: ID, name: String): [Class]
         classById(id: ID): Class
     }
@@ -37,6 +38,11 @@ const resolvers = {
         },
         studentById: (parent, args, context, info) => {
             return context.dataSources.studentDAO.getStudentById(args.id)
+        },
+        studentsInClass: (parent, args, context, info) => {
+            const students = context.dataSources.studentDAO.getStudents();
+            const clazz = context.dataSources.classDAO.getClassById(args.id);
+            return students.filter(student => clazz.studentIds.includes(student.id))
         },
         classes: (parent, args, context, info) => {
             return context.dataSources.classDAO.getClasses(args)
