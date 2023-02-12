@@ -11,8 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-datasource": "^3.3.2",
-    "apollo-server": "^3.11.1",
+    "@apollo/server": "^4.3.3",
+    "@apollo/datasource": "^3.3.2",
     "lodash": "^4.17.21"
   }
 }

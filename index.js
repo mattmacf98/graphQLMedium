@@ -1,8 +1,9 @@
-import {ApolloServer, gql} from "apollo-server";
+import {ApolloServer} from "@apollo/server";
+import { startStandaloneServer } from '@apollo/server/standalone';
 import {StudentDAO} from "./studentDAO.js";
 import {ClassDAO} from "./classDAO.js"
 
-const typeDefs = gql`
+const typeDefs = `#graphql
     type Query {
         students(id: ID, firstName: String, lastName: String, grade: Int): [Student]
         studentById(id: ID): Student
@@ -26,39 +27,38 @@ const typeDefs = gql`
     }
 `
 
-const dataSources = () => ({
-    studentDAO: new StudentDAO(),
-    classDAO: new ClassDAO()
-})
+
+const studentDAO = new StudentDAO();
+const classDAO = new ClassDAO();
 
 const resolvers = {
     Query: {
         students: (parent, args, context, info) => {
-            return context.dataSources.studentDAO.getStudents(args);
+            return studentDAO.getStudents(args);
         },
         studentById: (parent, args, context, info) => {
-            return context.dataSources.studentDAO.getStudentById(args.id)
+            return studentDAO.getStudentById(args.id)
         },
         studentsInClass: (parent, args, context, info) => {
-            const students = context.dataSources.studentDAO.getStudents();
-            const clazz = context.dataSources.classDAO.getClassById(args.id);
+            const students = studentDAO.getStudents();
+            const clazz = classDAO.getClassById(args.id);
             return students.filter(student => clazz.studentIds.includes(student.id))
         },
         classes: (parent, args, context, info) => {
-            return context.dataSources.classDAO.getClasses(args)
+            return classDAO.getClasses(args)
         },
         classById: (parent, args, context, info) => {
-            return context.dataSources.classDAO.getClassById(args.id)
+            return classDAO.getClassById(args.id)
         }
     },
     Student: {
         classes: (student, args, context, info) => {
-            return context.dataSources.classDAO.getClasses().filter(clazz => clazz.studentIds.includes(student.id))
+            return classDAO.getClasses().filter(clazz => clazz.studentIds.includes(student.id))
         }
     }
 }
 
-const gqlServer = new ApolloServer({typeDefs, resolvers, dataSources});
+const gqlServer = new ApolloServer({typeDefs, resolvers});
 
-gqlServer.listen({port: process.env.port || 4000})
-    .then(({url}) => console.log(`graphql server started on http://localhost:4000`))
+const { url } = await startStandaloneServer(gqlServer);
+console.log(url)
